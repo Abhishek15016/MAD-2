@@ -1,0 +1,550 @@
+# 📘 JavaScript Basics – (MAD 2)
+
+## 1️⃣ Comments in JavaScript
+
+Comments are used to explain code and are **ignored by the JavaScript engine**.
+
+### 🔹 Single-line Comment
+
+```js
+// This is a single line comment
+```
+
+### 🔹 Multiple Single-line Comments
+
+```js
+// This is
+// a
+// multiline
+// comment
+```
+
+### 🔹 Multi-line Comment (Block Comment)
+
+```js
+/*
+   This is
+   a
+   multiline
+   comment
+*/
+```
+
+---
+
+## 2️⃣ JavaScript Code Structure
+
+### 🔹 Printing Output
+
+JavaScript uses `console.log()` to print output in the browser console.
+
+```js
+console.log("hello");
+console.log("world");
+```
+
+### 🔹 Semicolon (`;`) Usage
+
+* Semicolons **are optional** in JavaScript.
+* JavaScript automatically inserts semicolons **if statements are on separate lines**.
+
+```js
+console.log("hello")
+console.log("world")
+```
+
+### 🔹 When Semicolon is Required
+
+If multiple statements are written on the **same line**, semicolons are required.
+
+```js
+console.log("hello"); console.log("world");
+```
+
+❌ This will cause an error:
+
+```js
+console.log("hello") console.log("world");
+```
+
+---
+
+## 3️⃣ Expressions in JavaScript
+
+JavaScript **evaluates expressions** before printing.
+
+```js
+console.log(1 + 2 + 6); // Output: 9
+```
+
+* Expressions can span multiple lines if they are part of the **same argument**.
+
+```js
+console.log(
+  1 + 2 +
+  6
+);
+```
+
+---
+
+## 4️⃣ Declaring Variables (`let`)
+
+### 🔹 Variable Declaration
+
+```js
+let message;
+message = "hello";
+console.log(message);
+```
+
+### 🔹 Declaration + Assignment Together
+
+```js
+let age = 25.5;
+console.log(age);
+```
+
+---
+
+## 5️⃣ Rules for Variable Names
+
+✅ Allowed:
+
+```js
+let hello5;
+let _hello;
+let MESSAGE;
+```
+
+❌ Not Allowed:
+
+```js
+let 5hello; // cannot start with number
+```
+
+📌 Rules:
+
+* Must start with a **letter** or `_`
+* Cannot start with a **number**
+* Numbers allowed **after** first character
+
+---
+
+## 6️⃣ Data Types in JavaScript
+
+### 🔹 String
+
+```js
+let message = "hello";
+```
+
+### 🔹 Number
+
+```js
+let age = 25;
+let price = 25.5; // No separate int/float in JS
+```
+
+➡️ Both integers and decimals are of type **Number**.
+
+### 🔹 Boolean
+
+```js
+let isMale = true;
+console.log(isMale);
+```
+
+---
+
+## 7️⃣ Camel Case Naming Convention
+
+Used for **compound variable names** in JavaScript.
+
+```js
+let isMale;
+let userAge;
+let accountBalance;
+```
+
+📌 Rule:
+
+* First word → lowercase
+* Next words → Capitalized
+
+---
+
+## 8️⃣ Dynamic Typing (Weakly Typed Language)
+
+JavaScript allows **type change at runtime**.
+
+```js
+let isMale = true;
+console.log(isMale);
+
+isMale = "yes";   // boolean → string
+console.log(isMale);
+```
+
+➡️ This is why JavaScript is called **weakly typed**.
+
+---
+
+## 9️⃣ Reassignment vs Redeclaration
+
+### ✅ Reassignment (Allowed)
+
+```js
+let isMale = true;
+isMale = false;
+```
+
+### ❌ Redeclaration (Not Allowed with `let`)
+
+```js
+let isMale = true;
+let isMale = false; // ❌ Error: already declared
+```
+
+📌 Summary:
+
+* **Reassigning value** → ✅ Allowed
+* **Redeclaring variable** → ❌ Not Allowed
+
+---
+
+# 🧰 Resources Used in the Video
+
+### 🔹 Tools & Software
+
+* **VS Code (Visual Studio Code)**
+* **Live Server Extension** (for running HTML files locally)
+
+### 🔹 Browser Tools
+
+* **Browser Developer Tools**
+
+  * Right Click → Inspect
+  * Console Tab (to view `console.log()` output)
+
+### 🔹 Files Used
+
+* `index.html`
+* `script.js` (external JavaScript file)
+
+---
+
+# 📘 JavaScript – Data Types, Variables, Scoping & Comparisons 
+
+---
+
+## 1️⃣ JavaScript Data Types
+
+JavaScript data types are divided into:
+
+* **Primitive Data Types**
+* **Non-Primitive Data Types**
+
+---
+
+## 2️⃣ Primitive Data Types
+
+### 🔹 1. Number
+
+* Includes **integers** and **floating-point values**
+* JavaScript does **not** differentiate between `int` and `float`
+
+```js
+let a = 25;
+let b = 25.5;
+```
+
+* Maximum safe integer:
+
+```text
+2^53 - 1
+```
+
+* Numbers beyond this limit lose precision
+
+---
+
+### 🔹 2. BigInt
+
+* Used for **very large numbers** beyond `Number` limit
+* Mainly used in **finance / stock markets**
+
+```js
+let big = 9007199254740991n; // note the 'n'
+```
+
+📌 **General usage**: Rarely used in normal applications
+
+---
+
+### 🔹 3. String
+
+* Characters enclosed in quotes
+
+```js
+let name = "hello";
+let numStr = "123";
+```
+
+📌 Even `"123"` is a **string**, not a number
+
+---
+
+### 🔹 4. Boolean
+
+* Logical values
+
+```js
+true
+false
+```
+
+* Written in **lowercase** in JavaScript
+* Same format used in **JSON**
+
+---
+
+### 🔹 5. null
+
+* Represents an **empty object**
+* Used when a variable is intentionally empty
+
+```js
+let value = null;
+```
+
+📌 Similar to `None` in Python
+
+---
+
+### 🔹 6. undefined
+
+* Variable is declared but **no value is assigned**
+
+```js
+let val;
+console.log(val); // undefined
+```
+
+```js
+let val2 = undefined; // same as above
+```
+
+---
+
+### 🔹 7. Symbol
+
+* Unique primitive value
+* Rarely used (advanced use cases)
+
+---
+
+## 3️⃣ Non-Primitive Data Type
+
+### 🔹 Object
+
+* Stores data in **key–value pairs**
+* Can store multiple values together
+
+📌 Will be explained in detail later
+
+---
+
+## 4️⃣ Variable Declarations in JavaScript
+
+### 🔹 `let`
+
+* Allows reassignment
+* Block-scoped
+
+```js
+let message = "hello";
+message = "world";
+```
+
+---
+
+### 🔹 `const`
+
+* Must be **initialized at declaration**
+* Reassignment ❌ not allowed
+* Block-scoped
+
+```js
+const pi = 3.14;
+// pi = 4.14 ❌ error
+```
+
+📌 Use `const` for values that should **never change**
+
+---
+
+### 🔹 `var` (Old way – introduced in 1995)
+
+* Allows reassignment
+* ❌ No block scope
+* Function-scoped
+
+```js
+var message = "Hello from var";
+message = "changed message";
+```
+
+📌 **Avoid `var` in modern JavaScript**
+
+---
+
+## 5️⃣ Scoping in JavaScript
+
+### 🔹 Block Scope
+
+Applies to:
+
+* `{ }`
+* `if`
+* `for`, `while` loops
+
+#### `let` and `const` → Block Scoped
+
+```js
+{
+  let x = 10;
+}
+// x ❌ not accessible here
+```
+
+---
+
+### 🔹 `var` has NO block scope
+
+```js
+{
+  var y = 20;
+}
+console.log(y); // ✅ works
+```
+
+📌 This causes **unexpected bugs**
+
+---
+
+### 🔹 Global vs Block Access
+
+* Global variables → accessible inside blocks
+* Block variables → ❌ not accessible outside
+
+---
+
+## 6️⃣ Hoisting Difference (`let` vs `var`)
+
+### 🔹 `let`
+
+```js
+console.log(a);
+let a = 10;
+// ❌ ReferenceError
+```
+
+---
+
+### 🔹 `var`
+
+```js
+console.log(b);
+var b = 10;
+// ✅ undefined
+```
+
+📌 This inconsistency is why `var` is discouraged
+
+---
+
+## 7️⃣ Truthy and Falsy Values
+
+### 🔹 Truthy Values
+
+```text
+"abc", 35, true, 12.67, 1
+```
+
+### 🔹 Falsy Values
+
+```text
+false, undefined, null, 0, "", NaN
+```
+
+📌 Used in conditions (`if`, loops)
+
+---
+
+## 8️⃣ Comparisons in JavaScript
+
+### 🔹 Equality Operators
+
+| Operator | Meaning                              |
+| -------- | ------------------------------------ |
+| `==`     | Loose equality (type conversion)     |
+| `===`    | Strict equality (no type conversion) |
+
+---
+
+### 🔹 Loose Equality (`==`)
+
+```js
+console.log("21" == 21); // true
+```
+
+**Steps internally:**
+
+1. Convert string → number
+2. Compare values
+
+---
+
+### 🔹 Strict Equality (`===`)
+
+```js
+console.log("21" === 21); // false
+```
+
+📌 Type + value must match
+
+---
+
+### 🔹 null vs undefined
+
+```js
+null == undefined      // true
+null === undefined    // false
+```
+
+---
+
+## 9️⃣ Lexicographical (Dictionary) Comparison
+
+Used for strings with `<` or `>`
+
+```js
+console.log("zq" < "aqa"); // false
+```
+
+📌 Comparison happens **character by character**, like a dictionary
+
+---
+
+## 🔟 Type Conversion to Number
+
+```js
+let val3 = "123v";
+console.log(Number(val3)); // NaN
+```
+
+* `NaN` → Not a Number
+* Happens when conversion fails
+
+---
