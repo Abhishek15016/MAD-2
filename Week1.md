@@ -889,3 +889,519 @@ console.log(obj1.myFunc);
 * Arrow functions are widely used for **callbacks**
 
 ---
+# 📘 JavaScript Notes — Hoisting, IIFE, and Callbacks
+
+---
+
+# 1️⃣ Variable vs Function Usage
+
+In JavaScript:
+
+* **Variables → logged**
+* **Functions → called**
+
+Example:
+
+```js
+let a = "apple"
+console.log(a)   // logging a variable
+
+function d(){
+    console.log("dolphin")
+}
+
+d() // calling a function
+```
+
+---
+
+# 2️⃣ Hoisting in JavaScript
+
+## Definition
+
+**Hoisting** is the behavior where JavaScript **moves declarations of variables and functions to the top of the scope before execution**.
+
+Important:
+
+* Only **declaration is hoisted**
+* **Initialization is NOT hoisted**
+
+---
+
+# 3️⃣ How JavaScript Executes a Script
+
+When JavaScript runs a script:
+
+Step 1️⃣
+JS engine scans the entire script.
+
+Step 2️⃣
+It **collects all variables and functions**
+
+Step 3️⃣
+It **moves their declarations to the top**
+
+Example script:
+
+```js
+console.log(a)
+let a = "apple"
+```
+
+Internally JS treats it like:
+
+```js
+let a
+console.log(a)
+a = "apple"
+```
+
+---
+
+# 4️⃣ Hoisting Behavior of Variables
+
+Different keywords behave differently during hoisting.
+
+---
+
+## 🔹 let
+
+Variables declared with `let` are hoisted but remain in the **Temporal Dead Zone (TDZ)**.
+
+Example:
+
+```js
+console.log(a)
+let a = "apple"
+```
+
+Output:
+
+```
+ReferenceError
+```
+
+Reason:
+
+```
+a exists but cannot be accessed yet
+```
+
+---
+
+## 🔹 const
+
+`const` behaves exactly like `let`.
+
+Example:
+
+```js
+console.log(b)
+const b = "ball"
+```
+
+Output:
+
+```
+ReferenceError
+```
+
+Because it is in **TDZ (Temporal Dead Zone)**.
+
+---
+
+## 🔹 var
+
+`var` behaves differently.
+
+It is hoisted **with initial value = undefined**
+
+Example:
+
+```js
+console.log(c)
+var c = "caterpillar"
+```
+
+Output:
+
+```
+undefined
+```
+
+Internally JS interprets it as:
+
+```js
+var c = undefined
+console.log(c)
+c = "caterpillar"
+```
+
+---
+
+# 5️⃣ Temporal Dead Zone (TDZ)
+
+## Definition
+
+The **Temporal Dead Zone** is the time between:
+
+```
+variable declaration hoisting
+AND
+variable initialization
+```
+
+During this time the variable **exists but cannot be accessed**.
+
+Example:
+
+```js
+console.log(a)
+let a = "apple"
+```
+
+`a` exists but cannot be used yet.
+
+---
+
+# 6️⃣ Hoisting Summary
+
+| Declaration Type | Hoisted | Initial Value   | Access before declaration |
+| ---------------- | ------- | --------------- | ------------------------- |
+| var              | Yes     | undefined       | Allowed                   |
+| let              | Yes     | TDZ             | Error                     |
+| const            | Yes     | TDZ             | Error                     |
+| function         | Yes     | Full definition | Allowed                   |
+
+---
+
+# 7️⃣ Hoisting of Functions
+
+Functions are hoisted **with their full definition**.
+
+Example:
+
+```js
+d()
+
+function d(){
+    console.log("dolphin")
+}
+```
+
+Output:
+
+```
+dolphin
+```
+
+Even though the function is defined later.
+
+---
+
+# 8️⃣ Function Expressions and Hoisting
+
+Function expressions behave like **variables**.
+
+Example:
+
+```js
+e()
+
+let e = function(){
+    console.log("elephant")
+}
+```
+
+Output:
+
+```
+ReferenceError
+```
+
+Because `e` is treated as a variable.
+
+---
+
+## Example
+
+```js
+let e = function(){
+    console.log("elephant")
+}
+
+e()
+```
+
+Output
+
+```
+elephant
+```
+
+---
+
+# 9️⃣ Function Expression with const
+
+Same rule applies.
+
+```js
+f()
+
+const f = function(){
+    console.log("phantom")
+}
+```
+
+Output
+
+```
+ReferenceError
+```
+
+Because `f` is still in TDZ.
+
+---
+
+# 🔟 Function Expression with var
+
+When declared using `var`:
+
+```js
+g()
+
+var g = function(){
+    console.log("game of thrones")
+}
+```
+
+Output:
+
+```
+TypeError: g is not a function
+```
+
+Reason:
+
+```
+g = undefined initially
+```
+
+---
+
+# 1️⃣1️⃣ Hoisting Summary for Functions
+
+| Type                        | Hoisted               | Result         |
+| --------------------------- | --------------------- | -------------- |
+| Named function              | Yes (full definition) | Works          |
+| Function expression (let)   | TDZ                   | ReferenceError |
+| Function expression (const) | TDZ                   | ReferenceError |
+| Function expression (var)   | undefined             | TypeError      |
+
+---
+
+# 1️⃣2️⃣ IIFE (Immediately Invoked Function Expression)
+
+## Definition
+
+An **IIFE** is a function that:
+
+```
+is defined and executed immediately
+```
+
+---
+
+## Syntax
+
+```js
+(() => {
+    console.log("immediately invoked from arrow")
+})();
+```
+
+Output
+
+```
+immediately invoked from arrow
+```
+
+---
+
+## Normal Function vs IIFE
+
+Normal:
+
+```js
+const myFunc = () => {
+    console.log("hello")
+}
+
+myFunc()
+```
+
+IIFE:
+
+```js
+(() => {
+    console.log("hello")
+})();
+```
+
+---
+
+## Why IIFE Was Used
+
+Earlier JavaScript used IIFE to:
+
+* create private scope
+* avoid global variable pollution
+
+Today frameworks handle this automatically.
+
+---
+
+# 1️⃣3️⃣ Callbacks in JavaScript
+
+## Definition
+
+A **callback** is:
+
+> A function passed as an argument to another function.
+
+---
+
+## Example
+
+```js
+function greet(name){
+    console.log(`Hello, ${name}`)
+}
+```
+
+---
+
+### Function that accepts callback
+
+```js
+function run_callback(callback){
+    console.log("About to run the callback...")
+    callback("MAD II")
+    console.log("Callback finished!")
+}
+```
+
+---
+
+### Running the callback
+
+```js
+run_callback(greet)
+```
+
+Output:
+
+```
+About to run the callback...
+Hello, MAD II
+Callback finished!
+```
+
+---
+
+# 1️⃣4️⃣ How Callback Works
+
+Execution flow:
+
+```
+run_callback(greet)
+        ↓
+print "About to run callback"
+        ↓
+call greet("MAD II")
+        ↓
+print Hello MAD II
+        ↓
+print Callback finished
+```
+
+---
+
+# 1️⃣5️⃣ Real Example (setTimeout)
+
+JavaScript has built-in functions that use callbacks.
+
+Example:
+
+```js
+setTimeout(function(){
+    console.log("Hello after 2 seconds")
+},2000)
+```
+
+Explanation:
+
+```
+setTimeout(callbackFunction , delay)
+```
+
+Example:
+
+```
+callback → function to run
+delay → milliseconds
+```
+
+2000 ms = 2 seconds.
+
+---
+
+# 1️⃣6️⃣ Callback Function Types
+
+The callback can be:
+
+✔ named function
+✔ anonymous function
+✔ arrow function
+
+Example:
+
+### Named
+
+```js
+setTimeout(greet,2000)
+```
+
+---
+
+### Anonymous
+
+```js
+setTimeout(function(){
+    console.log("Hello")
+},2000)
+```
+
+---
+
+### Arrow
+
+```js
+setTimeout(()=>{
+    console.log("Hello")
+},2000)
+```
+
+---
+
+# 1️⃣7️⃣ Key Takeaways
+
+✔ JavaScript **hoists declarations before execution**
+✔ `let` and `const` create **Temporal Dead Zone**
+✔ `var` initializes with **undefined**
+✔ **functions are hoisted with full definition**
+✔ **function expressions behave like variables**
+✔ **IIFE runs immediately after definition**
+✔ **callbacks are functions passed as arguments**
+
+---
