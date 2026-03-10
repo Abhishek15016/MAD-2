@@ -548,3 +548,344 @@ console.log(Number(val3)); // NaN
 * Happens when conversion fails
 
 ---
+# 📘 JavaScript Functions 
+
+---
+
+# 1️⃣ What is a Function?
+
+A **function** is a reusable block of code that performs a specific task.
+
+Instead of writing the same code repeatedly, we can define it once and **reuse it multiple times**.
+
+### Example
+
+```js
+function add(a, b) {
+    return a + b;
+}
+```
+
+Here:
+
+* `add` → function name
+* `a, b` → parameters
+* `return` → returns the result
+
+---
+
+# 2️⃣ Syntax of a Function
+
+Basic structure:
+
+```js
+function functionName(parameters) {
+    // function body
+    return value;
+}
+```
+
+Example:
+
+```js
+function add(a, b) {
+    return a + b;
+}
+```
+
+Calling the function:
+
+```js
+console.log(add(4,6));
+```
+
+Output:
+
+```
+10
+```
+
+---
+
+# 3️⃣ Types of Functions in JavaScript
+
+JavaScript supports **three main ways** of defining functions:
+
+1. Named Functions (Conventional Functions)
+2. Function Expressions (Unnamed Functions)
+3. Arrow Functions
+
+---
+
+# 4️⃣ Named Functions (Conventional Functions)
+
+These are the **standard functions with a name**.
+
+### Syntax
+
+```js
+function add(a, b) {
+    return a + b;
+}
+```
+
+### Calling the function
+
+```js
+console.log(add(4,6));
+```
+
+### Characteristics
+
+* Have a **function name**
+* Can be reused anywhere
+* Traditional function definition
+
+---
+
+# 5️⃣ Function Expressions (Unnamed Functions)
+
+Here a **function is assigned to a variable**.
+
+These are called **function expressions**.
+
+### Syntax
+
+```js
+const sum = function(a, b) {
+    return a + b;
+};
+```
+
+### Calling it
+
+```js
+console.log(sum(4,7));
+```
+
+Output:
+
+```
+11
+```
+
+### Key Idea
+
+The function **does not have its own name**.
+
+Instead, it is **stored inside a variable**.
+
+```
+variable → holds the function
+```
+
+---
+
+# 6️⃣ Why Function Expressions Exist
+
+They are useful when:
+
+* A function needs to be **stored inside a variable**
+* A function needs to be **passed as data**
+* A function is used **inside objects**
+
+---
+
+# 7️⃣ Arrow Functions
+
+Arrow functions are a **shorter syntax** for writing functions.
+
+They are widely used in modern JavaScript.
+
+### Syntax
+
+```js
+const product = (a, b) => a * b;
+```
+
+Calling it:
+
+```js
+console.log(product(3,4));
+```
+
+Output
+
+```
+12
+```
+
+---
+
+# 8️⃣ Arrow Function Structure
+
+Basic form:
+
+```js
+(parameters) => expression
+```
+
+Example:
+
+```js
+const multiply = (a, b) => a * b;
+```
+
+---
+
+# 9️⃣ Arrow Function with Multiple Statements
+
+If the function body has **multiple lines**, we must use `{}` and `return`.
+
+```js
+const product = (a, b) => {
+    return a * b;
+};
+```
+
+---
+
+# 🔟 Implicit Return in Arrow Functions
+
+If there is **only one expression**, return is automatic.
+
+```js
+const product = (a,b) => a*b;
+```
+
+Equivalent to:
+
+```js
+const product = (a,b) => {
+    return a*b;
+};
+```
+
+---
+
+# 1️⃣1️⃣ Using Functions Inside Objects
+
+Functions can also be stored **as properties of objects**.
+
+When a function belongs to an object, it is called a **method**.
+
+### Example
+
+```js
+const obj1 = {
+    a: "hello",
+    myFunc: function(a, b) {
+        return a + b;
+    }
+}
+```
+
+Calling the function:
+
+```js
+obj1.myFunc(3,4)
+```
+
+Output
+
+```
+7
+```
+
+---
+
+# 1️⃣2️⃣ Accessing Object Methods
+
+Object methods are accessed using **dot notation**.
+
+```js
+objectName.methodName()
+```
+
+Example
+
+```js
+obj1.myFunc(3,4)
+```
+
+---
+
+# 1️⃣3️⃣ Why Function Expressions Are Used in Objects
+
+Objects need functions **as properties**.
+
+Example structure:
+
+```js
+const obj = {
+    key: value,
+    key2: value,
+    method: function(){}
+}
+```
+
+Here:
+
+```
+method → function stored inside object
+```
+
+---
+
+# 1️⃣4️⃣ Summary Table
+
+| Type                | Syntax                     | Has Name | Usage                         |
+| ------------------- | -------------------------- | -------- | ----------------------------- |
+| Named Function      | `function add(){}`         | Yes      | Traditional functions         |
+| Function Expression | `const sum = function(){}` | No       | Functions stored in variables |
+| Arrow Function      | `const f = ()=>{}`         | No       | Short syntax, callbacks       |
+
+---
+
+# 1️⃣5️⃣ Example Code from Lecture
+
+```js
+// Named function
+function add(a, b) {
+    return a + b;
+}
+
+console.log(add(4,6));
+
+
+// Function expression
+const sum = function(a, b) {
+    return a + b;
+}
+
+console.log(sum(4,7));
+
+
+// Arrow function
+const product = (a, b) => a*b;
+
+console.log(product(3,4));
+
+
+// Object with function
+const obj1 = {
+    a: "hello",
+    myFunc: function(a, b) {
+        return a + b;
+    }
+}
+
+console.log(obj1.myFunc);
+```
+
+---
+
+# 1️⃣6️⃣ Key Takeaways
+
+* Functions allow **code reuse**
+* JavaScript supports **multiple function styles**
+* Arrow functions provide **shorter syntax**
+* Functions inside objects are called **methods**
+* Arrow functions are widely used for **callbacks**
+
+---
