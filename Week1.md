@@ -1405,3 +1405,518 @@ setTimeout(()=>{
 ✔ **callbacks are functions passed as arguments**
 
 ---
+
+# 📘 JavaScript Collections – Arrays & Array Methods
+
+---
+
+# 1️⃣ Collections in JavaScript
+
+A **collection** is a data structure that stores multiple values.
+
+The most common collection in JavaScript is:
+
+```
+Array
+```
+
+---
+
+# 2️⃣ JavaScript Array
+
+An **array** is a collection that stores multiple elements in a single variable.
+
+### Key Feature
+
+Unlike many languages, **JavaScript arrays can store mixed data types**.
+
+Example:
+
+```javascript
+let arr1 = [1, "three", 'd', greet];
+```
+
+Elements inside the array:
+
+| Element | Type     |
+| ------- | -------- |
+| 1       | number   |
+| "three" | string   |
+| 'd'     | string   |
+| greet   | function |
+
+So an array can contain:
+
+* numbers
+* strings
+* characters
+* functions
+* objects
+
+---
+
+# 3️⃣ Array vs Python List
+
+JavaScript arrays behave very similarly to **Python lists**.
+
+Example:
+
+Python
+
+```python
+arr = [1, "three", 'd']
+```
+
+JavaScript
+
+```javascript
+let arr = [1, "three", 'd'];
+```
+
+---
+
+# 4️⃣ Array Methods
+
+JavaScript provides built-in **array methods** to operate on arrays.
+
+Main methods discussed:
+
+```
+map()
+filter()
+find()
+reduce()
+sort()
+```
+
+---
+
+# 5️⃣ map() Method
+
+## Purpose
+
+`map()` is used to:
+
+```
+apply an operation to every element of an array
+```
+
+---
+
+## Traditional Way (Without map)
+
+Step 1 — define operation
+
+```javascript
+function sayType(element){
+    console.log(typeof(element));
+}
+```
+
+Step 2 — iterate
+
+```javascript
+for(let i=0; i<arr1.length; i++){
+    sayType(arr1[i]);
+}
+```
+
+This performs the operation for each element.
+
+---
+
+## Using map()
+
+Syntax
+
+```
+array.map(callback_function)
+```
+
+Example
+
+```javascript
+arr1.map((x) => console.log(typeof(x)));
+```
+
+Explanation:
+
+```
+x → each element of the array
+typeof(x) → operation performed
+```
+
+Output
+
+```
+number
+string
+string
+function
+```
+
+---
+
+## Important Idea
+
+`map()` combines two steps:
+
+```
+iteration + operation
+```
+
+---
+
+# 6️⃣ Callback Function in map()
+
+Example:
+
+```javascript
+arr1.map((x) => console.log(typeof(x)));
+```
+
+Here:
+
+```
+(x) => console.log(typeof(x))
+```
+
+is a **callback function**.
+
+Definition:
+
+> A function passed as an argument to another function.
+
+So:
+
+```
+map → top-level function
+arrow function → callback function
+```
+
+---
+
+# 7️⃣ filter() Method
+
+## Purpose
+
+`filter()` selects elements that satisfy a condition.
+
+Steps:
+
+```
+1. Take an element
+2. Apply condition
+3. If condition true → keep element
+4. Store in new array
+```
+
+---
+
+Example
+
+```javascript
+const arr2 = [1, 3, 2, 7, 8, 5];
+
+let fltr_rslt = arr2.filter((x) => x % 2 != 0);
+
+console.log(fltr_rslt);
+```
+
+Output
+
+```
+[1, 3, 7, 5]
+```
+
+Explanation
+
+```
+Keep elements where x % 2 ≠ 0
+→ odd numbers
+```
+
+---
+
+## Important
+
+`filter()` always returns:
+
+```
+a new array
+```
+
+---
+
+# 8️⃣ find() Method
+
+## Purpose
+
+`find()` returns the **first element** that satisfies a condition.
+
+Steps:
+
+```
+1. Take element
+2. Apply condition
+3. If true → return element
+4. Stop searching
+```
+
+---
+
+Example
+
+```javascript
+let find_rslt = arr2.find((x) => x > 5);
+
+console.log(find_rslt);
+```
+
+Output
+
+```
+7
+```
+
+Explanation
+
+Array:
+
+```
+[1,3,2,7,8,5]
+```
+
+First number greater than 5:
+
+```
+7
+```
+
+---
+
+## Difference from filter
+
+| Method   | Result               |
+| -------- | -------------------- |
+| filter() | returns array        |
+| find()   | returns single value |
+
+---
+
+# 9️⃣ reduce() Method
+
+## Purpose
+
+`reduce()` reduces an array into **one single value**.
+
+It uses:
+
+```
+initial value + operation
+```
+
+---
+
+Syntax
+
+```
+array.reduce((accumulator, element) => operation , initial_value)
+```
+
+---
+
+Example
+
+```javascript
+let rdce_rslt = arr2.reduce((init, x) => init + x, 2);
+
+console.log(rdce_rslt);
+```
+
+---
+
+## Step-by-Step
+
+Array
+
+```
+[1,3,2,7,8,5]
+```
+
+Initial value
+
+```
+2
+```
+
+Calculation
+
+```
+2 + 1 = 3
+3 + 3 = 6
+6 + 2 = 8
+8 + 7 = 15
+15 + 8 = 23
+23 + 5 = 28
+```
+
+Final Output
+
+```
+28
+```
+
+---
+
+# 🔟 sort() Method
+
+## Purpose
+
+Sort elements of an array.
+
+---
+
+Example
+
+```javascript
+arr2.sort();
+console.log(arr2);
+```
+
+---
+
+## Important Behavior
+
+By default JavaScript sorts **lexicographically (dictionary order)**.
+
+This means:
+
+```
+numbers are first converted to strings
+```
+
+---
+
+# 1️⃣1️⃣ String Sorting
+
+Example
+
+```javascript
+let arr3 = ["three", "two", "six", "five"]
+
+arr3.sort();
+console.log(arr3);
+```
+
+Sorting order
+
+```
+dictionary order
+```
+
+Example result
+
+```
+["five","six","three","two"]
+```
+
+---
+
+# 1️⃣2️⃣ Problem with Numbers
+
+Example
+
+```javascript
+let arr4 = [1,20,3,100]
+
+arr4.sort()
+```
+
+Result
+
+```
+[1,100,20,3]
+```
+
+Why?
+
+Because numbers become strings:
+
+```
+"1"
+"20"
+"3"
+"100"
+```
+
+Lexicographic comparison:
+
+```
+1
+100
+20
+3
+```
+
+---
+
+# 1️⃣3️⃣ Correct Numeric Sorting
+
+To sort numbers correctly use a comparison function.
+
+Ascending order
+
+```javascript
+arr4.sort((a,b) => a-b);
+```
+
+Explanation
+
+```
+a-b > 0 → a after b
+a-b < 0 → a before b
+```
+
+---
+
+Descending order
+
+```javascript
+arr4.sort((a,b) => b-a);
+```
+
+---
+
+# 1️⃣4️⃣ Sort Behavior Summary
+
+| Method           | Behavior           |
+| ---------------- | ------------------ |
+| sort()           | lexicographic sort |
+| sort((a,b)=>a-b) | numeric ascending  |
+| sort((a,b)=>b-a) | numeric descending |
+
+---
+
+# 1️⃣5️⃣ Summary of Array Methods
+
+| Method   | Purpose                            | Return                  |
+| -------- | ---------------------------------- | ----------------------- |
+| map()    | apply operation to each element    | new array               |
+| filter() | keep elements satisfying condition | new array               |
+| find()   | first element satisfying condition | single value            |
+| reduce() | combine array into one value       | single value            |
+| sort()   | sort elements                      | modifies original array |
+
+---
+
+# 1️⃣6️⃣ Key Takeaways
+
+✔ Arrays can store **multiple data types**
+✔ `map()` → transform elements
+✔ `filter()` → select elements
+✔ `find()` → first matching element
+✔ `reduce()` → convert array into single value
+✔ `sort()` → default lexicographic sorting
+
+---
