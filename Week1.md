@@ -1920,3 +1920,502 @@ arr4.sort((a,b) => b-a);
 ✔ `sort()` → default lexicographic sorting
 
 ---
+
+# 📘 JavaScript Objects (Collections)
+
+## 1️⃣ What is an Object in JavaScript?
+
+An **Object** in JavaScript is a **collection of key-value pairs**.
+
+It is similar to a **Python dictionary**.
+
+Python Example
+
+```python
+student = {
+    "name": "John",
+    "age": 20
+}
+```
+
+JavaScript Example
+
+```javascript
+let obj = {
+    name: "John",
+    age: 20
+}
+```
+
+So:
+
+```text
+Object = collection of properties (key : value)
+```
+
+---
+
+# 2️⃣ Object Syntax
+
+Objects are defined using **curly braces `{}`**.
+
+```javascript
+let obj1 = {
+    key1: value1,
+    key2: value2
+}
+```
+
+Example
+
+```javascript
+let obj1 = {
+    "a": 123,
+    "a123": "b",
+    c: "caterpillar"
+}
+```
+
+---
+
+# 3️⃣ Object Properties
+
+Each **key in an object is called a property**.
+
+Example
+
+```javascript
+let obj1 = {
+    a: 123,
+    a123: "b",
+    c: "caterpillar"
+}
+```
+
+Properties are:
+
+```
+a
+a123
+c
+```
+
+Values can be:
+
+* number
+* string
+* function
+* object
+* array
+
+---
+
+# 4️⃣ Keys in JavaScript Objects
+
+### Rule 1 — Keys can be strings
+
+```javascript
+let obj = {
+    "name": "Rahul"
+}
+```
+
+---
+
+### Rule 2 — Quotes are optional for valid identifiers
+
+Instead of
+
+```javascript
+"name": "Rahul"
+```
+
+You can write
+
+```javascript
+name: "Rahul"
+```
+
+---
+
+### Rule 3 — Numeric keys must be accessed differently
+
+Example
+
+```javascript
+let obj = {
+    123: "number key"
+}
+```
+
+Access using:
+
+```javascript
+obj[123]
+```
+
+NOT
+
+```javascript
+obj.123 ❌
+```
+
+---
+
+# 5️⃣ Accessing Object Properties
+
+Two ways:
+
+## Dot Notation
+
+```javascript
+obj.property
+```
+
+Example
+
+```javascript
+console.log(obj1.a)
+console.log(obj1.c)
+console.log(obj1.a123)
+```
+
+---
+
+## Bracket Notation
+
+Used when:
+
+* key is numeric
+* key is dynamic
+
+Example
+
+```javascript
+obj[123]
+```
+
+---
+
+# 6️⃣ Functions Inside Objects (Object Methods)
+
+Objects can store **functions as values**.
+
+Example
+
+```javascript
+let obj1 = {
+    fns: function(){
+        console.log("This is object method")
+    }
+}
+```
+
+Here:
+
+```
+fns = property
+function = value
+```
+
+This function is called a:
+
+```text
+Object Method
+```
+
+---
+
+### Calling Object Method
+
+```javascript
+obj1.fns()
+```
+
+Example
+
+```javascript
+console.log(obj1.fns())
+```
+
+Output
+
+```
+This is object method
+```
+
+---
+
+# 7️⃣ Example Object
+
+```javascript
+const obj2 = {
+    var1: 25,
+    var2: 30,
+    var3: "Adarsh",
+
+    func1: function() {
+        console.log("this is first function")
+    },
+
+    func2: function(course){
+        console.log(`${this.var3} likes the course ${course}`)
+    },
+
+    func3: function() {
+        console.log(`The first property of the obj is ${this.var1}`)
+    }
+}
+```
+
+---
+
+# 8️⃣ The `this` Keyword (Object Context)
+
+`this` refers to the **current object**.
+
+Example
+
+```javascript
+console.log(`${this.var3} likes the course ${course}`)
+```
+
+Here:
+
+```
+this.var3 → obj2.var3
+```
+
+So output becomes:
+
+```
+Adarsh likes the course MAD II
+```
+
+---
+
+# 9️⃣ Calling Object Functions
+
+```javascript
+console.log(obj2.var1)
+console.log(obj2.var2)
+
+obj2.func1()
+obj2.func2("MAD II")
+obj2.func3()
+```
+
+Output
+
+```
+25
+30
+this is first function
+Adarsh likes the course MAD II
+The first property of the obj is 25
+```
+
+---
+
+# 🔟 What is Context in JavaScript?
+
+Context means:
+
+```text
+Which object "this" refers to
+```
+
+Example
+
+```
+this.var1
+```
+
+If called as
+
+```
+obj2.func3()
+```
+
+Then
+
+```
+this → obj2
+```
+
+---
+
+# 1️⃣1️⃣ Context Loss Problem
+
+When a method is **copied into a variable**, the object context may be lost.
+
+Example
+
+```javascript
+let testvar = obj2.func3
+testvar()
+```
+
+Output
+
+```
+undefined
+```
+
+Why?
+
+Because:
+
+```
+this no longer refers to obj2
+```
+
+This is called:
+
+```text
+Loss of Context
+```
+
+---
+
+# 1️⃣2️⃣ Fixing Context using `bind()`
+
+We can bind the function to another object.
+
+Example
+
+```javascript
+const obj3 = {
+    var1: 36
+}
+```
+
+Bind function
+
+```javascript
+let testvar = obj2.func3.bind(obj3)
+```
+
+Now run
+
+```javascript
+testvar()
+```
+
+Output
+
+```
+The first property of the obj is 36
+```
+
+---
+
+# 1️⃣3️⃣ What bind() Does
+
+`bind()` permanently attaches a function to an object.
+
+Syntax
+
+```javascript
+function.bind(object)
+```
+
+Example
+
+```javascript
+obj2.func3.bind(obj3)
+```
+
+Meaning:
+
+```
+Run func3 with obj3 as context
+```
+
+So:
+
+```
+this → obj3
+```
+
+---
+
+# 1️⃣4️⃣ Summary of Object Concepts
+
+| Concept          | Meaning                       |
+| ---------------- | ----------------------------- |
+| Object           | Collection of key-value pairs |
+| Property         | Key of object                 |
+| Method           | Function inside object        |
+| Dot notation     | obj.property                  |
+| Bracket notation | obj["property"]               |
+| this             | Refers to current object      |
+| Context          | Object that `this` refers to  |
+| bind()           | Fixes context                 |
+
+---
+
+# 1️⃣5️⃣ Full Code Example (From Lecture)
+
+```javascript
+let obj1 = {
+    "a": 123,
+    "a123": "b",
+    c: "caterpillar",
+    fns: function(){
+        console.log("This is object method")
+    } 
+}
+
+console.log(obj1.a)
+console.log(obj1.c)
+console.log(obj1.a123)
+console.log(obj1.fns())
+
+const obj2 = {
+    var1: 25,
+    var2: 30,
+    var3: "Adarsh",
+    func1: function() {
+        console.log("this is first function")
+    },
+    func2: function(course){
+        console.log(`${this.var3} likes the course ${course}`)
+    },
+    func3: function() {
+        console.log(`The first property of the obj is ${this.var1}`)
+    }
+}
+
+const obj3 = {
+    var1: 36
+}
+
+console.log(obj2.var1);
+console.log(obj2.var2);
+
+obj2.func1();
+obj2.func2("MAD II");
+obj2.func3();
+
+let testvar = obj2.func3.bind(obj3);
+
+console.log(testvar);
+
+testvar();
+```
+
+---
+
+# ⭐ Quick Revision (30-second memory trick)
+
+```
+Object → key : value pairs
+Property → key
+Method → function in object
+this → current object
+Context → object used by this
+bind() → fixes context
+```
+
+---

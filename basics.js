@@ -122,48 +122,48 @@
 // "abc", 35, true, 12.67, 1 ---> truthy 
 // false, undefined, null, 0, "" , NaN ---> falsy
 
-console.log("21" == 21); // step 1
-// console.log(Number("21") == 21); // step 2
-// console.log(21 == 21);  // => step 3
+// console.log("21" == 21); // step 1
+// // console.log(Number("21") == 21); // step 2
+// // console.log(21 == 21);  // => step 3
 
-console.log("zq" < "aqa") // lexicographical comparison
+// console.log("zq" < "aqa") // lexicographical comparison
 
-console.log("21" === 21); 
+// console.log("21" === 21); 
 
-console.log(null == undefined);
-console.log(null === undefined);
+// console.log(null == undefined);
+// console.log(null === undefined);
 
 // Functions 
-// conventional functions - named functions
-function add(a, b) {
-    return a + b;
-}
+// // conventional functions - named functions
+// function add(a, b) {
+//     return a + b;
+// }
 
-// let sum = add(4,6);
-console.log(add(4,6));
+// // let sum = add(4,6);
+// console.log(add(4,6));
 
-// function expressions - unnamed functions 
-const sum = function(a, b) { // 
-    return a + b;
-}
+// // function expressions - unnamed functions 
+// const sum = function(a, b) { // 
+//     return a + b;
+// }
 
-// arrow function 
-const product = (a, b) => a*b; // callbacks
-// const product = (a, b) => {return a*b}; // callbacks
+// // arrow function 
+// const product = (a, b) => a*b; // callbacks
+// // const product = (a, b) => {return a*b}; // callbacks
 
-console.log(sum(4, 7));
-console.log(product(3,4))
+// console.log(sum(4, 7));
+// console.log(product(3,4))
 
 
-// Objects
-const obj1 = { // context
-    a: "hello",
-    myFunc: function(a, b) { // 
-        return a + b;
-    }
-}
+// // Objects
+// const obj1 = { // context
+//     a: "hello",
+//     myFunc: function(a, b) { // 
+//         return a + b;
+//     }
+// }
 
-console.log(obj1.myFunc);
+// console.log(obj1.myFunc);
 
 // block scope - single block , conditional statement, loops 
 
