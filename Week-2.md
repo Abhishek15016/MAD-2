@@ -1123,5 +1123,645 @@ Destructuring → unpack values
 Spread (...) → expand elements
 Rest (...) → collect remaining values
 ```
+---
+
+# 📘 JavaScript Runtime, Event Loop & Asynchrony
+
+---
+
+# 1️⃣ Why JavaScript Needs Asynchronous Behavior
+
+Originally:
+
+* **HTML → structure**
+* **CSS → styling**
+
+But they **cannot perform logic or interactivity**.
+
+So **JavaScript** was introduced to add:
+
+```text
+✔ Interactivity
+✔ Event handling
+✔ Dynamic content
+✔ API calls
+```
+
+However:
+
+```text
+Processing tasks take time
+```
+
+Example:
+
+* Fetching data from server
+* Loading images
+* API requests
+* Timers
+
+If JavaScript executed **everything sequentially**, the webpage would **freeze**.
+
+❌ Bad UX
+
+So JavaScript runtime uses:
+
+```text
+Asynchronous execution
+```
+
+---
+
+# 2️⃣ JavaScript Runtime Architecture
+
+The JavaScript runtime consists of **4 main components**.
+
+```
+JavaScript Runtime
+│
+├── Call Stack
+├── Web APIs
+├── Task Queue
+└── Event Loop
+```
+
+---
+
+# 3️⃣ Call Stack
+
+The **Call Stack** executes code **synchronously**.
+
+Meaning:
+
+```text
+One instruction at a time
+Top → executed first
+```
+
+Example
+
+```javascript
+console.log("Start")
+console.log("End")
+```
+
+Execution order:
+
+```
+Start
+End
+```
+
+Call stack example:
+
+```
+console.log("Start")
+console.log("End")
+```
+
+Stack
+
+```
+console.log("End")
+console.log("Start")
+```
+
+Execution → **top to bottom**
+
+---
+
+# 4️⃣ Web APIs
+
+Web APIs handle **asynchronous tasks**.
+
+Examples:
+
+```
+setTimeout()
+setInterval()
+fetch()
+DOM events
+```
+
+These are provided by **the browser**, not JavaScript itself.
+
+Example
+
+```javascript
+setTimeout(() => {
+   console.log("Hello")
+},2000)
+```
+
+This task goes to:
+
+```
+Web API
+```
+
+---
+
+# 5️⃣ Task Queue
+
+When asynchronous operations finish, they move to:
+
+```
+Task Queue
+```
+
+Task queue stores:
+
+```
+callback functions
+```
+
+Example
+
+```
+setTimeout callback
+```
+
+---
+
+# 6️⃣ Event Loop
+
+The **Event Loop continuously checks**:
+
+```
+Is the Call Stack empty?
+```
+
+If YES:
+
+```
+Move task from Task Queue → Call Stack
+```
+
+This process keeps repeating.
+
+---
+
+# 7️⃣ Flow of JavaScript Runtime
+
+```
+1. Code enters Call Stack
+2. Async tasks go to Web APIs
+3. Result goes to Task Queue
+4. Event Loop checks Call Stack
+5. If empty → push Task to Call Stack
+```
+
+---
+
+# 8️⃣ Example 1 — Synchronous Execution
+
+### Code
+
+```javascript
+function first() {
+    console.log("First function start");
+    second();
+    console.log("First function end");
+}
+
+function second() {
+    console.log("Second function");
+}
+
+console.log("Program start");
+
+first();
+
+console.log("Program end");
+```
+
+---
+
+### Execution Step by Step
+
+1️⃣ Program start
+
+```
+Program start
+```
+
+2️⃣ `first()` runs
+
+```
+First function start
+```
+
+3️⃣ `second()` runs
+
+```
+Second function
+```
+
+4️⃣ Return to first()
+
+```
+First function end
+```
+
+5️⃣ Program continues
+
+```
+Program end
+```
+
+---
+
+### Final Output
+
+```
+Program start
+First function start
+Second function
+First function end
+Program end
+```
+
+Everything runs **synchronously**.
+
+---
+
+# 9️⃣ Example 2 — Asynchronous Execution
+
+### Code
+
+```javascript
+console.log("Start");
+
+setTimeout(function timeoutCallback() {
+    console.log("Timeout executed");
+}, 2000);
+
+console.log("End");
+```
+
+---
+
+### Execution Steps
+
+1️⃣ `console.log("Start")`
+
+```
+Start
+```
+
+2️⃣ `setTimeout()` goes to
+
+```
+Web APIs
+```
+
+3️⃣ Next line runs immediately
+
+```
+End
+```
+
+4️⃣ After **2 seconds**
+
+```
+Timeout executed
+```
+
+---
+
+### Final Output
+
+```
+Start
+End
+Timeout executed
+```
+
+---
+
+# 🔟 Why `End` Prints Before Timeout
+
+Because:
+
+```
+setTimeout → asynchronous
+```
+
+It does **not block execution**.
+
+Instead:
+
+```
+Call Stack continues running
+```
+
+---
+
+# 1️⃣1️⃣ Syntax of setTimeout
+
+Structure
+
+```javascript
+setTimeout(function, delay)
+```
+
+Example
+
+```javascript
+setTimeout(() => {
+   console.log("Hello")
+},2000)
+```
+
+Meaning:
+
+```
+Run function after 2000 ms
+```
+
+---
+
+# 1️⃣2️⃣ Callback Functions
+
+The function passed inside `setTimeout` is called:
+
+```
+Callback Function
+```
+
+Example
+
+```javascript
+setTimeout(function timeoutCallback(){
+   console.log("Timeout executed")
+},2000)
+```
+
+Here
+
+```
+timeoutCallback → callback function
+```
+
+---
+
+# 1️⃣3️⃣ Three Ways to Write Callback
+
+### 1️⃣ Named Function
+
+```javascript
+function timeoutCallback(){
+   console.log("Timeout executed")
+}
+
+setTimeout(timeoutCallback,2000)
+```
+
+---
+
+### 2️⃣ Function Expression
+
+```javascript
+const timeoutCallback = function(){
+   console.log("Timeout executed")
+}
+
+setTimeout(timeoutCallback,2000)
+```
+
+---
+
+### 3️⃣ Arrow Function (Most Common)
+
+```javascript
+setTimeout(() => {
+   console.log("Timeout executed")
+},2000)
+```
+
+---
+
+# 1️⃣4️⃣ Example — Functions with setTimeout
+
+### Code
+
+```javascript
+function greet() {
+    console.log("Hello");
+}
+
+function delayedGreet() {
+    setTimeout(function () {
+        console.log("Delayed Hello");
+    }, 1000);
+}
+
+console.log("Start");
+
+greet();
+
+delayedGreet();
+
+console.log("End");
+```
+
+---
+
+### Execution
+
+1️⃣ Start
+
+```
+Start
+```
+
+2️⃣ greet()
+
+```
+Hello
+```
+
+3️⃣ delayedGreet()
+
+```
+setTimeout → Web API
+```
+
+4️⃣ console.log("End")
+
+```
+End
+```
+
+5️⃣ After 1 second
+
+```
+Delayed Hello
+```
+
+---
+
+### Final Output
+
+```
+Start
+Hello
+End
+Delayed Hello
+```
+
+---
+
+# 1️⃣5️⃣ Important Rule
+
+```
+Synchronous code runs first
+```
+
+Then:
+
+```
+Asynchronous code runs later
+```
+
+Even if delay = **0 ms**
+
+---
+
+# 1️⃣6️⃣ Example — setTimeout with 0 Delay
+
+### Code
+
+```javascript
+function first() {
+    console.log("First start");
+
+    setTimeout(function () {
+        console.log("First timeout");
+    }, 0);
+
+    console.log("First end");
+}
+
+function second() {
+    console.log("Second function");
+}
+
+console.log("Program start");
+
+first();
+
+second();
+
+console.log("Program end");
+```
+
+---
+
+### Execution
+
+1️⃣ Program start
+
+```
+Program start
+```
+
+2️⃣ first()
+
+```
+First start
+```
+
+3️⃣ setTimeout → Web API
+
+4️⃣ next line runs
+
+```
+First end
+```
+
+5️⃣ second()
+
+```
+Second function
+```
+
+6️⃣ Program end
+
+```
+Program end
+```
+
+7️⃣ Event loop executes timeout
+
+```
+First timeout
+```
+
+---
+
+### Final Output
+
+```
+Program start
+First start
+First end
+Second function
+Program end
+First timeout
+```
+
+---
+
+# 1️⃣7️⃣ Key Concept
+
+Even with delay **0 ms**
+
+```
+setTimeout is asynchronous
+```
+
+So it executes **after synchronous code**.
+
+---
+
+# 1️⃣8️⃣ Execution Priority
+
+Execution order:
+
+```
+1️⃣ Call Stack (Synchronous)
+2️⃣ Web APIs
+3️⃣ Task Queue
+4️⃣ Event Loop
+```
+
+---
+
+# ⭐ Ultimate Revision Summary
+
+```
+JavaScript = Single-threaded
+
+Call Stack → executes synchronous code
+
+Web APIs → handle async tasks
+setTimeout
+fetch
+DOM events
+
+Task Queue → stores completed async callbacks
+
+Event Loop → moves tasks to Call Stack
+```
+
+---
+
+# ⚡ One-Line Rule for Exams
+
+```
+Synchronous code executes first,
+asynchronous callbacks execute later via the event loop.
+```
 
 ---
