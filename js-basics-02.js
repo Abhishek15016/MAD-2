@@ -131,7 +131,7 @@ let arr1 = [1, "three", 'd', greet]; // Python
 // // arr4.sort((a, b) => a - b); // numbers
 // console.log(arr4);
 
-Objects
+// Objects
 
 let obj1 = {
     "a": 123,
@@ -170,19 +170,19 @@ const obj3 = {
 // console.log(obj2.var2);
 // obj2.func1();
 // obj2.func2("MAD II");
-obj2.func3(); // function execution with context 
+// obj2.func3(); // function execution with context 
 
 let testvar = obj2.func3 // function with lost scope -- this????
 
-testvar();
+// testvar();
 // apply(), call(), bind()
 
 // A] for functions without arguments
 
 // testvar.apply(obj2) // first argument that we provide is always the context
 
-// testvar.call(obj2)
-// testvar.call(obj3)
+testvar.call(obj2)
+testvar.call(obj3)
 
 // testvar.bind(obj2)()
 
