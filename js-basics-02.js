@@ -204,35 +204,35 @@ testvar.call(obj3)
 
 // The "this" binding in objects
 
-// var var2 = 40;
+var var2 = 40;
 
-// const obj4 = {
-//     var1: 10,
-//     var2: 16,
-//     // i: "undefined",
-//     func1: function() { // normal function
-//         console.log(`The first property of the obj is ${this.var1}`)
-//     },
-//     func2: () => { // arrow function
-//         console.log(`The second property of the obj is ${this.var2}`) 
+const obj4 = {
+    var1: 10,
+    var2: 16,
+    // i: "undefined",
+    func1: function() { // normal function
+        console.log(`The first property of the obj is ${this.var1}`)
+    },
+    func2: () => { // arrow function
+        console.log(`The second property of the obj is ${this.var2}`) 
+        // this.var2 = 16 iff this !--> obj4
+    },
+    func3: function(){
+        const func3_ = () => {
+            console.log(`The second property of the obj is ${this.var2}`)
+        }
+        func3_();
+        // this.var2 = 16 iff this --> obj4
+    },
+    func4: () => { // arrow function
+        function test3() {
+            console.log(`The second property of the obj is ${this.var2}`)
+        }
+        test3();
 //         // this.var2 = 16 iff this !--> obj4
-//     },
-//     func3: function(){
-//         const func3_ = () => {
-//             console.log(`The second property of the obj is ${this.var2}`)
-//         }
-//         func3_();
-// //         // this.var2 = 16 iff this --> obj4
-// //     },
-// //     func4: () => { // arrow function
-// //         function test3() {
-// //             console.log(`The second property of the obj is ${this.var2}`)
-// //         }
-// //         test3();
-// // //         // this.var2 = 16 iff this !--> obj4
-//     },
+    },
 
-// }
+}
 
 // obj4.func1();
 // obj4.func2();
